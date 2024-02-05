@@ -1,0 +1,135 @@
+* {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  box-sizing: border-box;
+}
+html,
+body {
+  overflow: hidden;
+  margin: 0;
+  width: 100%;
+  background-image: url(../images/fondo.gif);
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+.page-container {
+  display: grid;
+  grid-template-rows: 1fr 1f;
+  grid-template-areas: "panel" "main";
+  gap: 1rem;
+  padding: 1rem;
+  background-image: url(../images/wows.svg);
+  min-height: 100vh;
+  width: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+.colorea {
+  display: grid;
+  place-content: center;
+  color: rgb(248, 243, 243);
+  font-weight: bold;
+  font-size: 2rem;
+  position: sticky;
+  top: 0;
+  margin-top: 0;
+  padding: 0;
+}
+
+.panel {
+  grid-area: panel;
+  width: 90%;
+  margin: 0 auto;
+  max-height: 200px;
+  color: #fff;
+  text-align: center;
+  position: absolute;
+  z-index: 10;
+  top: 0;
+}
+
+.panel_search {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  justify-content: center;
+}
+.subpanel_search {
+  display: flex;
+  width: 100%;
+  margin: 0.5rem;
+  padding: 0.5rem;
+}
+.secondSelectEncyclopedia {
+  display: none;
+}
+
+/* Tratamiento de resultados */
+.main {
+  grid-area: main;
+  display: grid;
+  grid-template-areas: "section aside";
+  gap: 1rem;
+  padding: 1rem;
+  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 100vh;
+}
+.section {
+  display: grid;
+  grid-area: section;
+  grid-template-columns: repeat(4, minmax(120px, 1fr));
+  grid-template-rows: repeat(auto-fill, minmax(120px, 1fr));
+  grid-gap: 2rem;
+  margin: 1rem;
+  overflow: hidden;
+}
+.container-card img {
+  width: 100%;
+  height: auto;
+  max-height: 120px;
+  border-radius: 10px;
+  cursor: pointer;
+  object-fit: contain;
+  margin: 0.5rem;
+}
+.container-card img:hover {
+  transform: scale(1.1);
+  transition: all 0.5s ease;
+}
+/* Añade espacio entre las imágenes */
+.container-card img:not(:last-child) {
+  margin-right: 1rem;
+}
+.card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: rgba(138, 136, 136, 0.5);
+  border-radius: 10px;
+  text-align: center;
+  padding: 0.4rem;
+  margin: 0.3rem;
+}
+.container-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0.4rem;
+  margin: 0.3rem;
+}
+.aside {
+  grid-area: aside;
+  background-image: url(../images/barco1r.jpg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 10px;
+}
