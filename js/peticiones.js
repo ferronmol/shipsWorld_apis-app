@@ -28,6 +28,7 @@ const secondSelectEncyclopedia = document.getElementById(
 export const fetchShips = async () => {
   const ships = await fetch(url);
   const json = await ships.json();
+  console.log("pedido info de barcos");
   return json;
 };
 
@@ -40,5 +41,6 @@ export const fetchComanders = async () => {
     "https://api.worldofwarships.com/wows/encyclopedia/crews/?application_id=96b472d7bdc2aad0591a995d4ac74b08"
   );
   const json = await commanders.json();
+  console.log("pedido info de comandantes");
   return json;
 };

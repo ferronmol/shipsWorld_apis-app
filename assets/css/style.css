@@ -15,7 +15,7 @@ body {
 }
 .page-container {
   display: grid;
-  grid-template-rows: 1fr 1f;
+  grid-template-rows: minmax(100px 1fr) 1fr;
   grid-template-areas: "panel" "main";
   gap: 1rem;
   padding: 1rem;
@@ -61,7 +61,6 @@ body {
 .subpanel_search {
   display: flex;
   width: 100%;
-  margin: 0.5rem;
   padding: 0.5rem;
 }
 .secondSelectEncyclopedia {
@@ -79,36 +78,35 @@ body {
   overflow-y: auto;
   overflow-x: hidden;
   max-height: 100vh;
+  margin-top: 100px;
 }
 .section {
   display: grid;
   grid-area: section;
-  grid-template-columns: repeat(4, minmax(120px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   grid-template-rows: repeat(auto-fill, minmax(120px, 1fr));
   grid-gap: 2rem;
   margin: 1rem;
   overflow: hidden;
 }
-.container-card img {
+.card img {
   width: 100%;
-  height: auto;
-  max-height: 120px;
+  max-height: 80%;
   border-radius: 10px;
   cursor: pointer;
   object-fit: contain;
-  margin: 0.5rem;
 }
-.container-card img:hover {
+.card img:hover {
   transform: scale(1.1);
   transition: all 0.5s ease;
 }
 /* Añade espacio entre las imágenes */
-.container-card img:not(:last-child) {
+.card img:not(:last-child) {
   margin-right: 1rem;
 }
 .card {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   background-color: rgba(138, 136, 136, 0.5);
   border-radius: 10px;
@@ -124,6 +122,14 @@ body {
   text-align: center;
   padding: 0.4rem;
   margin: 0.3rem;
+}
+.text-card {
+  color: #fff;
+  font-weight: bold;
+  font-size: 0.7rem;
+  text-align: center;
+  padding: 0.3rem;
+  margin: 0.2rem;
 }
 .aside {
   grid-area: aside;
