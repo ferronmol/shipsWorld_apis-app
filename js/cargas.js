@@ -1,7 +1,7 @@
 import { fetchShips, fetchComanders } from "./peticiones.js";
 import { Barco, Comandante } from "./modelos.js";
 let comandantesArray = [];
-const comandantesPorPagina = 20;
+const comandantesPorPagina = 18;
 
 const section = document.querySelector("section");
 const categorySelect = document.querySelector("#categorySelect");
@@ -62,6 +62,8 @@ function showCommanderPagination() {
     pagination.appendChild(button);
   }
   section.appendChild(pagination);
+  console.log(comandantesArray);
+  createCommanderCards(comandantesArray.slice(0, comandantesPorPagina));
 }
 
 function createCommanderCards(comandantes) {
