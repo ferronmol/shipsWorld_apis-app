@@ -61,6 +61,7 @@ function showCommanderPagination() {
     });
     pagination.appendChild(button);
   }
+  section.innerHTML = "";
   section.appendChild(pagination);
   console.log(comandantesArray);
   createCommanderCards(comandantesArray.slice(0, comandantesPorPagina));

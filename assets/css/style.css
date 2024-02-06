@@ -15,12 +15,12 @@ body {
 }
 .page-container {
   display: grid;
-  grid-template-rows: minmax(100px 1fr) 1fr;
+  grid-template-rows: 100px 1fr;
   grid-template-areas: "panel" "main";
   gap: 1rem;
   padding: 1rem;
   background-image: url(../images/wows.svg);
-  min-height: 100vh;
+  /* min-height: 100vh; */
   width: 100%;
   background-size: contain;
   background-repeat: no-repeat;
@@ -74,11 +74,7 @@ body {
   grid-template-areas: "section aside";
   gap: 1rem;
   padding: 1rem;
-  overflow: hidden;
-  overflow-y: auto;
-  overflow-x: hidden;
   max-height: 100vh;
-  margin-top: 100px;
 }
 .section {
   display: grid;
@@ -88,6 +84,7 @@ body {
   grid-gap: 2rem;
   margin: 1rem;
   overflow: hidden;
+  background: rgba(138, 136, 136, 0.5);
 }
 .card img {
   width: 100%;
