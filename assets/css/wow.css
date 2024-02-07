@@ -5,7 +5,6 @@
 }
 html,
 body {
-  overflow: hidden;
   margin: 0;
   width: 100%;
   background-image: url(../images/fondo.gif);
@@ -19,8 +18,8 @@ body {
   grid-template-areas: "panel" "main";
   gap: 1rem;
   padding: 1rem;
-  background-image: url(../images/wows.svg);
-  /* min-height: 100vh; */
+  /*background-image: url(../images/wows.svg);
+   min-height: 100vh; */
   width: 100%;
   background-size: contain;
   background-repeat: no-repeat;
@@ -28,7 +27,7 @@ body {
   background-position: center;
 }
 
-.colorea {
+.title {
   display: grid;
   place-content: center;
   color: rgb(248, 243, 243);
@@ -66,10 +65,28 @@ body {
 .secondSelectEncyclopedia {
   display: none;
 }
+.user-container {
+  position: absolute;
+  right: 0;
+  top: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  margin: 10px;
+  background-color: rgba(138, 136, 136, 0.5);
+  border-radius: 10px;
+}
 
 /* Tratamiento de resultados */
 .main {
   grid-area: main;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   display: grid;
   grid-template-areas: "section aside";
   gap: 1rem;
@@ -78,15 +95,18 @@ body {
 }
 .section {
   display: grid;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  align-items: center;
   grid-area: section;
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   grid-template-rows: repeat(auto-fill, minmax(120px, 1fr));
-  grid-gap: 2rem;
+  grid-gap: 1.5rem;
   margin: 1rem;
-  overflow: hidden;
   background: rgba(138, 136, 136, 0.5);
 }
-.card img {
+.container-card img {
   width: 100%;
   max-height: 80%;
   border-radius: 10px;
@@ -97,10 +117,7 @@ body {
   transform: scale(1.1);
   transition: all 0.5s ease;
 }
-/* Añade espacio entre las imágenes */
-.card img:not(:last-child) {
-  margin-right: 1rem;
-}
+
 .card {
   display: flex;
   flex-direction: column;
@@ -121,6 +138,7 @@ body {
   margin: 0.3rem;
 }
 .text-card {
+  width: 100%;
   color: #fff;
   font-weight: bold;
   font-size: 0.7rem;
@@ -134,5 +152,41 @@ body {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+  border-radius: 10px;
+}
+/******PAGINACIONES********/
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  margin: 10px;
+}
+.pagination button {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  background-color: #f8f3f3;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+.pagination button:hover {
+  background-color: #000;
+  color: #fff;
+}
+.pagination button.active {
+  background-color: #000;
+  color: #fff;
+}
+.containerInfo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+  margin: 10px;
   border-radius: 10px;
 }

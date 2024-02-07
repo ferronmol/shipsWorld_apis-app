@@ -1,0 +1,143 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  font-family: "Montserrat", sans-serif;
+}
+body {
+  width: 100%;
+  height: 100vh;
+  background: url(../images/portaviones_1200x.jpg) no-repeat;
+  background-position: left;
+  background-clip: border-box;
+
+  background-size: cover;
+}
+
+.main {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+/* el container es el que contiene el formulario */
+.container {
+  margin-top: 2.5rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+.form {
+  height: 90%;
+  background-color: (255, 255, 255, 0.5);
+  padding: 30px;
+  border-radius: 30px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+  text-align: center;
+  max-width: 400px;
+  display: none;
+  cursor: pointer;
+}
+.form input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: cadetblue;
+}
+.ship_img {
+  margin-top: 5rem;
+  width: 95%;
+  margin-top: 0.5rem;
+  border-radius: 5px;
+  max-height: 150px;
+}
+.form.active {
+  display: block;
+}
+.form h2 {
+  font-family: "montserrat", sans-serif;
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+.form input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.form button {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 0.5rem;
+  margin: 4px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+}
+.form button:hover {
+  background-color: #3a4b5f;
+  color: white;
+}
+.form .toggle {
+  margin-top: 20px;
+  text-align: center;
+  cursor: pointer;
+}
+.form .toggle:hover {
+  color: #0a2647;
+}
+
+.left_container {
+  width: 50%;
+  margin-right: 0;
+  display: none;
+}
+.left_img {
+  display: none;
+  margin-left: 5rem;
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+}
+.error-login-message,
+.error-signup-message {
+  border-radius: 5px;
+  color: white;
+  background-color: darkred;
+  font-size: 1rem;
+  font-family: "Montserrat", sans-serif;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.bg {
+  background-color: gray;
+  border-radius: 6px;
+}
+
+/* quiero que la img_left se va a partir de 1024px */
+@media (min-width: 1024px) {
+  .left_container {
+    display: block;
+  }
+  .left_img {
+    display: block;
+  }
+  .container {
+    width: 50%;
+    max-height: 80%;
+  }
+}

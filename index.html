@@ -1,53 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WORLD OF WARSHIPS</title>
-    <link rel="shortcut icon" href="./assets/images/wows.svg" type="image/x-icon">
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <link rel="stylesheet" href="./assets/css/normalize.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Entrada y Registro</title>
+	<link rel="stylesheet" href="./assets/css/login.css">
+	<link href=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 
 <body>
-    <div class="page-container">
-        <nav class="panel">
-            <h2 class="colorea">WORLD OF WARSHIPS</h2>
-            <div class="panel_search" id="panel_search">
-                <label for="categorySelect">Selecciona una categoría:</label>
-                <select id="categorySelect">
-                    <option id="ratingsOption" value="ratings">Player ratings</option>
-                    <option id="accountOption" value="account">Account</option>
-                    <option id="shipsOption" value="ships">Warships</option>
-                    <option id="encyclopediaOption" value="encyclopedia">Encyclopedia</option>
-                    <option id="seasonsOption" value="seasons">Seasons</option>
-                    <option id="clansOption" value="clans">Clans</option>
-                </select>
-            </div>
-            <div class="subpanel_search" id="subpanel_search">
-                <!-- Segundo select para Enciclopedia -->
-                <select id="secondSelectEncyclopedia" class="secondSelectEncyclopedia">
-                    <option value="barcos">Barcos</option>
-                    <option value="comandantes">Comandantes</option>
-                </select>
-        </nav>
+	<div class="main" id="main">
+		<div class="container">
+			<div class="form active" id="form">
+				<h2>Introduzca su cuenta de usuario
+				</h2>
+				<form id="login-form">
+					<div class="error-login-message"></div>
+					<input type="text" autocomplete="name" id="username" placeholder="Usuario">
+					<input type="password" autocomplete="current-password" id="password" placeholder="Contraseña">
+					<button type="submit" id="login-btn">Entrar</button>
+				</form>
+				<div class="toggle bg" id="signup-toggle"><strong>No tienes cuenta? Registrate</strong> </div>
 
-        <main class="main" id="main">
-            <section class="section" id="section">
-                <!--AQUI MUESTRO INFORMACION ADICIONAL-->
-            </section>
-            <aside class="aside" id="aside">
-                <h1 class="aside_title">
-                </h1>
-                <!--AQUI MUESTRO INFORMACION ADICIONAL-->
-            </aside>
-        </main>
-    </div>
-    <script type="module" src="./js/peticiones.js"></script>
-    <script type="module" src="./js/modelos.js"></script>
-    <script type="module" src="./js/cargas.js"></script>
+			</div>
+			<div class="form" id="signup-form">
+				<h2>Registrate</h2>
+				<form>
+					<div class="error-signup-message"></div>
+					<input type="text" id="reg_user" autocomplete="name" placeholder="Usuario">
+					<input type="text" id="reg_email" autocomplete="address-level1" placeholder="Email">
+					<input type="password" autocomplete="new-password" id="reg_pass" placeholder="Contraseña">
+					<button type="submit" id="signup-btn">Registrate</button>
+				</form>
+				<div class="toggle" id="login-toggle">Ya tienes cuenta? Entrar</div>
+				<img id="ship" src="./assets/images/barco1r.jpg" alt="barco">
+			</div>
+		</div>
+	</div>
+	<script src="./js/login.js"></script>
 
 </body>
 

@@ -1,14 +1,23 @@
 import { fetchShips, fetchComanders } from "./peticiones.js";
 import { Barco, Comandante } from "./modelos.js";
 let comandantesArray = [];
-const comandantesPorPagina = 18;
-
+const comandantesPorPagina = 20;
+let paginaActual = 1;
+const userContainer = document.getElementById("user-container");
 const section = document.querySelector("section");
+const pagination = document.getElementById("pagination");
 const categorySelect = document.querySelector("#categorySelect");
 const secondSelectEncyclopedia = document.querySelector(
   "#secondSelectEncyclopedia"
 );
 const aside = document.querySelector("aside");
+
+//recupero del localstorage el usuario logueado ques un json y lo muestro en su contenedor
+const userdata = localStorage.getItem("username");
+
+console.log("Usuario logueado: ", userdata);
+const username = JSON.parse(userdata); //parseo el json a objeto
+userContainer.innerHTML = `<p>Bienvenido: ${username.name}</p>`;
 
 //funciones de peticiones de carga de datos
 const getShips = async () => {
@@ -46,31 +55,13 @@ categorySelect.addEventListener("change", async () => {
   }
 });
 
-function showCommanderPagination() {
-  console.log("mostrar paginacion de comandantes");
-  const pagination = document.createElement("div");
-  pagination.classList.add("pagination");
-  const pages = Math.ceil(comandantesArray.length / comandantesPorPagina);
-  for (let i = 1; i <= pages; i++) {
-    const button = document.createElement("button");
-    button.innerText = i;
-    button.addEventListener("click", () => {
-      const start = (i - 1) * comandantesPorPagina;
-      const end = start + comandantesPorPagina;
-      createCommanderCards(comandantesArray.slice(start, end));
-    });
-    pagination.appendChild(button);
-  }
-  section.innerHTML = "";
-  section.appendChild(pagination);
-  console.log(comandantesArray);
-  createCommanderCards(comandantesArray.slice(0, comandantesPorPagina));
-}
+/* ***************************************************** */
+function createCommanderCards(comandantes, page, comandantesPorPagina) {
+  const startIndex = (page - 1) * comandantesPorPagina;
+  const endIndex = page * comandantesPorPagina;
+  const comandantesPagina = comandantes.slice(startIndex, endIndex);
 
-function createCommanderCards(comandantes) {
-  section.innerHTML = "";
-
-  comandantes.forEach((comandante) => {
+  comandantesPagina.forEach((comandante) => {
     const div = document.createElement("div");
     div.classList.add("card");
     div.innerHTML = `
@@ -83,6 +74,61 @@ function createCommanderCards(comandantes) {
     </div>`;
     section.appendChild(div);
   });
+}
+function showCommanderPagination() {
+  createCommanderCards(comandantesArray, paginaActual, comandantesPorPagina);
+  const pageNumbers = Math.ceil(comandantesArray.length / comandantesPorPagina);
+  console.log("pageNumbers: ", pageNumbers);
+  const pagination = document.querySelector(".pagination");
+  pagination.innerHTML = "";
+  const previousButton = document.createElement("button");
+  previousButton.innerText = "Anterior";
+  previousButton.classList.add("pagination_button");
+  previousButton.id = "previous";
+  previousButton.disabled = true;
+  previousButton.addEventListener("click", () => {
+    if (paginaActual > 1) {
+      paginaActual--;
+      createCommanderCards(
+        comandantesArray,
+        paginaActual,
+        comandantesPorPagina
+      );
+    }
+  });
+  pagination.appendChild(previousButton);
+
+  for (let i = 1; i <= pageNumbers; i++) {
+    const button = document.createElement("button");
+    button.innerText = i;
+    button.classList.add("pagination_button");
+    button.addEventListener("click", () => {
+      paginaActual = i;
+      createCommanderCards(
+        comandantesArray,
+        paginaActual,
+        comandantesPorPagina
+      );
+    });
+    pagination.appendChild(button);
+  }
+
+  const nextButton = document.createElement("button");
+  nextButton.innerText = "Siguiente";
+  nextButton.classList.add("pagination_button");
+  nextButton.id = "next";
+  nextButton.disabled = true; // Ajusta esto según tu lógica de paginación
+  nextButton.addEventListener("click", () => {
+    if (paginaActual < pageNumbers) {
+      paginaActual++;
+      createCommanderCards(
+        comandantesArray,
+        paginaActual,
+        comandantesPorPagina
+      );
+    }
+  });
+  pagination.appendChild(nextButton);
 }
 
 secondSelectEncyclopedia.addEventListener("change", (e) => {
