@@ -3,6 +3,8 @@ import { Barco, Comandante } from "./modelos.js";
 let comandantesArray = [];
 const comandantesPorPagina = 20;
 let paginaActual = 1;
+let previousButton = document.getElementById("previous");
+let nextButton = document.getElementById("next");
 const userContainer = document.getElementById("user-container");
 const section = document.querySelector("section");
 const pagination = document.getElementById("pagination");
@@ -14,8 +16,7 @@ const aside = document.querySelector("aside");
 
 //recupero del localstorage el usuario logueado ques un json y lo muestro en su contenedor
 const userdata = localStorage.getItem("username");
-
-console.log("Usuario logueado: ", userdata);
+//console.log("Usuario logueado: ", userdata);
 const username = JSON.parse(userdata); //parseo el json a objeto
 userContainer.innerHTML = `<p>Bienvenido: ${username.name}</p>`;
 
@@ -55,7 +56,7 @@ categorySelect.addEventListener("change", async () => {
   }
 });
 
-/* ***************************************************** */
+/* ********************CREATE********************************* */
 function createCommanderCards(comandantes, page, comandantesPorPagina) {
   const startIndex = (page - 1) * comandantesPorPagina;
   const endIndex = page * comandantesPorPagina;
@@ -75,34 +76,35 @@ function createCommanderCards(comandantes, page, comandantesPorPagina) {
     section.appendChild(div);
   });
 }
-function showCommanderPagination() {
-  createCommanderCards(comandantesArray, paginaActual, comandantesPorPagina);
-  const pageNumbers = Math.ceil(comandantesArray.length / comandantesPorPagina);
-  console.log("pageNumbers: ", pageNumbers);
-  const pagination = document.querySelector(".pagination");
-  pagination.innerHTML = "";
-  const previousButton = document.createElement("button");
-  previousButton.innerText = "Anterior";
-  previousButton.classList.add("pagination_button");
-  previousButton.id = "previous";
-  previousButton.disabled = true;
-  previousButton.addEventListener("click", () => {
-    if (paginaActual > 1) {
-      paginaActual--;
-      createCommanderCards(
-        comandantesArray,
-        paginaActual,
-        comandantesPorPagina
-      );
-    }
-  });
-  pagination.appendChild(previousButton);
+function createShipCards(barcos, page, barcosPorPagina) {
+  const startIndex = (page - 1) * barcosPorPagina;
+  const endIndex = page * barcosPorPagina;
+  const barcosPagina = barcos.slice(startIndex, endIndex);
 
+  barcosPagina.forEach((barco) => {
+    const div = document.createElement("div");
+    div.classList.add("card");
+    div.innerHTML = `
+    <div class="container-card">
+    <img src="${barco.iconImage}" alt="Avatar">
+    <div class="text-card">
+      <h4><b>${barco.name}</b></h4>
+      <p>${barco.nation}</p>
+    </div>
+    </div>`;
+    section.appendChild(div);
+  });
+}
+/* ********************SHOW********************************* */
+function showCommanderPagination() {
+  //createCommanderCards(comandantesArray, paginaActual, comandantesPorPagina);
+  const pageNumbers = Math.ceil(comandantesArray.length / comandantesPorPagina);
+  console.log("Número de páginas: ", pageNumbers);
   for (let i = 1; i <= pageNumbers; i++) {
     const button = document.createElement("button");
     button.innerText = i;
-    button.classList.add("pagination_button");
     button.addEventListener("click", () => {
+      section.innerHTML = "";
       paginaActual = i;
       createCommanderCards(
         comandantesArray,
@@ -112,29 +114,40 @@ function showCommanderPagination() {
     });
     pagination.appendChild(button);
   }
-
-  const nextButton = document.createElement("button");
-  nextButton.innerText = "Siguiente";
-  nextButton.classList.add("pagination_button");
-  nextButton.id = "next";
-  nextButton.disabled = true; // Ajusta esto según tu lógica de paginación
-  nextButton.addEventListener("click", () => {
-    if (paginaActual < pageNumbers) {
-      paginaActual++;
-      createCommanderCards(
-        comandantesArray,
-        paginaActual,
-        comandantesPorPagina
-      );
-    }
-  });
-  pagination.appendChild(nextButton);
+  createCommanderCards(comandantesArray, paginaActual, comandantesPorPagina);
 }
-
+function showShipsPagination() {
+  const barcos = [
+    new Barco("Bismarck", "Alemania", "https://www.google.com"),
+    new Barco("Tirpitz", "Alemania", "https://www.google.com"),
+    new Barco("Yamato", "Japón", "https://www.google.com"),
+    new Barco("Iowa", "USA", "https://www.google.com"),
+    new Barco("Missouri", "USA", "https://www.google.com"),
+  ];
+  const barcosPorPagina = 2;
+  const pageNumbers = Math.ceil(barcos.length / barcosPorPagina);
+  console.log("Número de páginas: ", pageNumbers);
+  for (let i = 1; i <= pageNumbers; i++) {
+    const button = document.createElement("button");
+    button.innerText = i;
+    button.addEventListener("click", () => {
+      section.innerHTML = "";
+      paginaActual = i;
+      createShipCards(barcos, paginaActual, barcosPorPagina);
+    });
+    pagination.appendChild(button);
+  }
+  createShipCards(barcos, paginaActual, barcosPorPagina);
+}
+/*********  EVENTOS */
 secondSelectEncyclopedia.addEventListener("change", (e) => {
   console.log("Seleccionado: ", e.target.value);
   if (e.target.value === "comandantes") {
     console.log("Seleccionado: comandantes");
     showCommanderPagination();
+  }
+  if (e.target.value === "barcos") {
+    console.log("Seleccionado: barcos");
+    showShipsPagination();
   }
 });

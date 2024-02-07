@@ -120,6 +120,7 @@ body {
 
 .card {
   display: flex;
+  max-height: 150px;
   flex-direction: column;
   justify-content: space-between;
   background-color: rgba(138, 136, 136, 0.5);
@@ -155,8 +156,8 @@ body {
   border-radius: 10px;
 }
 /******PAGINACIONES********/
-.pagination {
-  display: flex;
+.pagination-container {
+  display: none;
   justify-content: center;
   align-items: center;
   gap: 10px;

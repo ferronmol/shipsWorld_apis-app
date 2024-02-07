@@ -19,6 +19,7 @@
             <div class="panel_search" id="panel_search">
                 <label for="categorySelect">Selecciona una categoría:</label>
                 <select id="categorySelect">
+                    <option value="" disabled selected>Selecciona una categoria</option>
                     <option id="ratingsOption" value="ratings">Player ratings</option>
                     <option id="accountOption" value="account">Account</option>
                     <option id="shipsOption" value="ships">Warships</option>
@@ -30,6 +31,7 @@
             <div class="subpanel_search" id="subpanel_search">
                 <!-- Segundo select para Enciclopedia -->
                 <select id="secondSelectEncyclopedia" class="secondSelectEncyclopedia">
+                    <option value="" disabled selected>Selecciona una opción</option>
                     <option value="barcos">Barcos</option>
                     <option value="comandantes">Comandantes</option>
                 </select>
@@ -37,7 +39,7 @@
 
         <main class="main" id="main">
             <section class="section" id="section">
-                <div class="pagination" id="pagination">
+                <div class="pagination-container" id="pagination">
                     <button id="previous" class="pagination_button" disabled>Anterior</button>
                     <button id="next" class="pagination_button" disabled>Siguiente</button>
                 </div>
