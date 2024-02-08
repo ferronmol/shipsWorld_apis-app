@@ -156,6 +156,7 @@ body {
   padding: 0.3rem;
   margin: 0.2rem;
 }
+
 .aside {
   grid-area: aside;
   background-image: url(../images/barco1r.jpg);

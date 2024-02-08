@@ -79,6 +79,7 @@ categorySelect.addEventListener("change", async () => {
  * @param {*} comandantesPorPagina
  */
 function createCommanderCards(comandantes, page, comandantesPorPagina) {
+  section.innerHTML = "";
   const startIndex = (page - 1) * comandantesPorPagina;
   const endIndex = page * comandantesPorPagina;
   const comandantesPagina = comandantes.slice(startIndex, endIndex);
@@ -104,6 +105,7 @@ function createCommanderCards(comandantes, page, comandantesPorPagina) {
  * @param {*} barcosPorPagina
  */
 function createShipCards(barcos, page, barcosPorPagina) {
+  section.innerHTML = "";
   const startIndex = (page - 1) * barcosPorPagina;
   const endIndex = page * barcosPorPagina;
   const barcosPagina = barcos.slice(startIndex, endIndex);
@@ -116,7 +118,7 @@ function createShipCards(barcos, page, barcosPorPagina) {
     <div class="container-card">
     <img src="${barco.imagenes}" alt="Avatar">
     <div class="text-card">
-      <h4><b>${barco.id}${barco.nombre}</b></h4>
+      <h4><b>${barco.nombre}</b></h4>
       <p>${barco.nacion}</p>
       <p>${barco.tipo}</p>
       <p>${barco.descripcion}</p>
@@ -134,6 +136,7 @@ function createShipCards(barcos, page, barcosPorPagina) {
 function showCommanderPagination() {
   //createCommanderCards(comandantesArray, paginaActual, comandantesPorPagina);
   const pageNumbers = Math.ceil(comandantesArray.length / comandantesPorPagina);
+  pagination.innerHTML = "";
   console.log("Número de páginas: ", pageNumbers);
   for (let i = 1; i <= pageNumbers; i++) {
     const button = document.createElement("button");
@@ -158,6 +161,8 @@ function showCommanderPagination() {
  * */
 
 function showShipsPagination() {
+  pagination.innerHTML = "";
+  section.innerHTML = "";
   const barcosPorPagina = 10;
   const pageNumbers = Math.ceil(barcosArray.length / barcosPorPagina);
   console.log("Número de páginas: ", pageNumbers);
