@@ -1,6 +1,7 @@
 import { fetchShips, fetchComanders } from "./peticiones.js";
 import { Barco, Comandante } from "./modelos.js";
 let comandantesArray = [];
+let barcosArray = [];
 const comandantesPorPagina = 20;
 let paginaActual = 1;
 let previousButton = document.getElementById("previous");
@@ -20,15 +21,28 @@ const userdata = localStorage.getItem("username");
 const username = JSON.parse(userdata); //parseo el json a objeto
 userContainer.innerHTML = `<p>Bienvenido: ${username.name}</p>`;
 
-//funciones de peticiones de carga de datos
+/**
+ * función que pide los barcos a la API
+ * @returns array de barcos
+ * */
 const getShips = async () => {
   try {
     const shipsData = await fetchShips();
     console.log("Ships data charged: ", shipsData);
+    const ships = shipsData.data;
+    barcosArray = Object.values(shipsData.data).map(
+      (shipsData) => new Barco(shipsData)
+    );
+    console.log("Barcos: ", barcosArray);
+    return barcosArray;
   } catch (error) {
     console.error("Error fetching ships data: ", error);
   }
 };
+/**
+ * función que pide los comandantes a la API
+ * @returns array de comandantes
+ * */
 const getComanders = async () => {
   try {
     const comandersData = await fetchComanders();
@@ -43,6 +57,7 @@ const getComanders = async () => {
     console.error("Error fetching comanders data: ", error);
   }
 };
+
 categorySelect.addEventListener("change", async () => {
   //si selecciona encyclopedia muestro el segundo select y pido los comandantes y barcos
   if (categorySelect.value === "encyclopedia") {
@@ -57,6 +72,12 @@ categorySelect.addEventListener("change", async () => {
 });
 
 /* ********************CREATE********************************* */
+/**
+ *  Crea las cartas de los comandantes
+ * @param {*} comandantes
+ * @param {*} page
+ * @param {*} comandantesPorPagina
+ */
 function createCommanderCards(comandantes, page, comandantesPorPagina) {
   const startIndex = (page - 1) * comandantesPorPagina;
   const endIndex = page * comandantesPorPagina;
@@ -76,26 +97,40 @@ function createCommanderCards(comandantes, page, comandantesPorPagina) {
     section.appendChild(div);
   });
 }
+/**
+ * Crea las cartas de los barcos
+ * @param {*} barcos
+ * @param {*} page
+ * @param {*} barcosPorPagina
+ */
 function createShipCards(barcos, page, barcosPorPagina) {
   const startIndex = (page - 1) * barcosPorPagina;
   const endIndex = page * barcosPorPagina;
   const barcosPagina = barcos.slice(startIndex, endIndex);
-
+  const article = document.createElement("article");
+  article.classList.add("cardArticle");
   barcosPagina.forEach((barco) => {
     const div = document.createElement("div");
     div.classList.add("card");
     div.innerHTML = `
     <div class="container-card">
-    <img src="${barco.iconImage}" alt="Avatar">
+    <img src="${barco.imagenes}" alt="Avatar">
     <div class="text-card">
-      <h4><b>${barco.name}</b></h4>
-      <p>${barco.nation}</p>
+      <h4><b>${barco.id}${barco.nombre}</b></h4>
+      <p>${barco.nacion}</p>
+      <p>${barco.tipo}</p>
+      <p>${barco.descripcion}</p>
     </div>
     </div>`;
-    section.appendChild(div);
+    article.appendChild(div);
   });
+  section.appendChild(article);
 }
 /* ********************SHOW********************************* */
+/*
+ * Muestra la paginación de los comandantes
+ *
+ * */
 function showCommanderPagination() {
   //createCommanderCards(comandantesArray, paginaActual, comandantesPorPagina);
   const pageNumbers = Math.ceil(comandantesArray.length / comandantesPorPagina);
@@ -116,30 +151,31 @@ function showCommanderPagination() {
   }
   createCommanderCards(comandantesArray, paginaActual, comandantesPorPagina);
 }
+
+/**
+ * Muestra la paginación de los barcos
+ *
+ * */
+
 function showShipsPagination() {
-  const barcos = [
-    new Barco("Bismarck", "Alemania", "https://www.google.com"),
-    new Barco("Tirpitz", "Alemania", "https://www.google.com"),
-    new Barco("Yamato", "Japón", "https://www.google.com"),
-    new Barco("Iowa", "USA", "https://www.google.com"),
-    new Barco("Missouri", "USA", "https://www.google.com"),
-  ];
-  const barcosPorPagina = 2;
-  const pageNumbers = Math.ceil(barcos.length / barcosPorPagina);
+  const barcosPorPagina = 10;
+  const pageNumbers = Math.ceil(barcosArray.length / barcosPorPagina);
   console.log("Número de páginas: ", pageNumbers);
   for (let i = 1; i <= pageNumbers; i++) {
     const button = document.createElement("button");
     button.innerText = i;
     button.addEventListener("click", () => {
+      //elimino el contenido del section
+      section;
       section.innerHTML = "";
       paginaActual = i;
-      createShipCards(barcos, paginaActual, barcosPorPagina);
+      createShipCards(barcosArray, paginaActual, barcosPorPagina);
     });
     pagination.appendChild(button);
   }
-  createShipCards(barcos, paginaActual, barcosPorPagina);
+  createShipCards(barcosArray, paginaActual, barcosPorPagina);
 }
-/*********  EVENTOS */
+/*****************  EVENTOS ***********************************************/
 secondSelectEncyclopedia.addEventListener("change", (e) => {
   console.log("Seleccionado: ", e.target.value);
   if (e.target.value === "comandantes") {

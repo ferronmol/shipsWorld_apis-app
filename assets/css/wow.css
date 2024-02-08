@@ -117,7 +117,16 @@ body {
   transform: scale(1.1);
   transition: all 0.5s ease;
 }
-
+.cardArticle {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: rgba(138, 136, 136, 0.5);
+  border-radius: 10px;
+  text-align: center;
+  padding: 0.4rem;
+  margin: 0.3rem;
+}
 .card {
   display: flex;
   max-height: 150px;

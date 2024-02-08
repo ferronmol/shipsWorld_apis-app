@@ -1,11 +1,11 @@
 export class Barco {
   constructor(data) {
     this.id = data.ship_id;
-    this.name = data.name;
-    this.description = data.description;
-    this.type = data.type;
-    this.nation = data.nation;
-    this.images = data.icons[0][1];
+    this.nombre = data.name;
+    this.descripcion = data.description;
+    this.tipo = data.type;
+    this.nacion = data.nation;
+    this.imagenes = data.images.small;
   }
   // Método para mostrar la información del barco
   showInfo() {
@@ -48,7 +48,7 @@ export class Barco {
 
 export class Comandante {
   constructor(data) {
-    this.first_names = data.first_names;
+    this.nombre = data.first_names;
     this.base_training_hire_price = data.base_training_hire_price;
     this.iconImage = data.icons[0][1];
     this.nation = data.nation;
