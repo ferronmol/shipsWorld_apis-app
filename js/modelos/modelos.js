@@ -45,7 +45,7 @@ export class Barco {
     this.images = images;
   }
 }
-
+/* ****************************************************************************** */
 export class Comandante {
   constructor(data) {
     this.nombre = data.first_names;

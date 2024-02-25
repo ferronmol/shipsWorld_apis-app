@@ -126,7 +126,7 @@ body {
   padding: 0.4rem;
   margin: 0.3rem;
 }
-.card {
+.card__enciclopedia {
   display: flex;
   max-width: 150px;
   max-height: 150px;
@@ -200,4 +200,8 @@ body {
   padding: 10px;
   margin: 10px;
   border-radius: 10px;
+}
+.white {
+  color: #fff;
+  text-align: center;
 }

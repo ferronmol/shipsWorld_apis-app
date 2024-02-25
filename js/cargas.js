@@ -1,5 +1,5 @@
 import { fetchShips, fetchComanders } from "./peticiones.js";
-import { Barco, Comandante } from "./modelos.js";
+import { Barco, Comandante } from "./modelos/modelos.js";
 let comandantesArray = [];
 let barcosArray = [];
 const comandantesPorPagina = 20;
@@ -19,7 +19,7 @@ const aside = document.querySelector("aside");
 const userdata = localStorage.getItem("username");
 //console.log("Usuario logueado: ", userdata);
 const username = JSON.parse(userdata); //parseo el json a objeto
-userContainer.innerHTML = `<p>Bienvenido: ${username.name}</p>`;
+userContainer.innerHTML = `<p>Welcome: ${username.name}</p>`;
 
 /**
  * función que pide los barcos a la API
@@ -59,6 +59,12 @@ const getComanders = async () => {
 };
 
 categorySelect.addEventListener("change", async () => {
+  //si selecciona playeer ratings abro la pagina de players.html
+  if (categorySelect.value === "ratings") {
+    console.log("Seleccionado: Player ratings");
+    window.location.href = "../pages/players.html";
+  }
+
   //si selecciona encyclopedia muestro el segundo select y pido los comandantes y barcos
   if (categorySelect.value === "encyclopedia") {
     console.log("Seleccionado: encyclopedia");
@@ -86,7 +92,7 @@ function createCommanderCards(comandantes, page, comandantesPorPagina) {
 
   comandantesPagina.forEach((comandante) => {
     const div = document.createElement("div");
-    div.classList.add("card");
+    div.classList.add("card__enciclopedia");
     div.innerHTML = `
     <div class="container-card">
     <img src="${comandante.iconImage}" alt="Avatar">
@@ -113,7 +119,7 @@ function createShipCards(barcos, page, barcosPorPagina) {
   article.classList.add("cardArticle");
   barcosPagina.forEach((barco) => {
     const div = document.createElement("div");
-    div.classList.add("card");
+    div.classList.add("card__enciclopedia");
     div.innerHTML = `
     <div class="container-card">
     <img src="${barco.imagenes}" alt="Avatar">
