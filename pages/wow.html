@@ -17,9 +17,9 @@
             <h2 class="title">WORLD OF WARSHIPS</h2>
             <div class="user-container" id="user-container"></div>
             <div class="panel_search" id="panel_search">
-                <label for="categorySelect">Selecciona una categoría:</label>
+                <label for="categorySelect">Select a Category:</label>
                 <select id="categorySelect">
-                    <option value="" disabled selected>Selecciona una categoria</option>
+                    <option value="" disabled selected>Categories</option>
                     <option id="ratingsOption" value="ratings">Player ratings</option>
                     <option id="accountOption" value="account">Account</option>
                     <option id="shipsOption" value="ships">Warships</option>
@@ -31,10 +31,14 @@
             <div class="subpanel_search" id="subpanel_search">
                 <!-- Segundo select para Enciclopedia -->
                 <select id="secondSelectEncyclopedia" class="secondSelectEncyclopedia">
-                    <option value="" disabled selected>Selecciona una opción</option>
+                    <option value="" disabled selected>Select an option </option>
                     <option value="barcos">Barcos</option>
                     <option value="comandantes">Comandantes</option>
                 </select>
+                <select id="nationalitySelect" class="nationalitySelect" name="nationality">
+                    <!-- Opciones de nacionalidades se agregarán dinámicamente con JavaScript -->
+                </select>
+            </div>
         </nav>
 
         <main class="main" id="main">
@@ -54,7 +58,8 @@
     </div>
     <script type="module" src="../js/peticiones.js"></script>
     <script type="module" src="../js/modelos/modelos.js"></script>
-    <script type="module" src="../js/cargas.js"></script>
+    <script type="module" src="../js/encyclopedia.js"></script>
+    <script type="module" src="../js/cards.js"></script>
 
 </body>
 

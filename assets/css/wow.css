@@ -64,6 +64,10 @@ body {
 }
 .secondSelectEncyclopedia {
   display: none;
+  margin: 0.5rem;
+}
+.nationalitySelect {
+  display: none;
 }
 .user-container {
   position: absolute;
@@ -96,6 +100,7 @@ body {
 .section {
   display: grid;
   display: flex;
+  flex-wrap: wrap;
   align-self: center;
   justify-content: center;
   align-items: center;
@@ -105,6 +110,7 @@ body {
   grid-gap: 1.5rem;
   margin: 1rem;
   background: rgba(138, 136, 136, 0.5);
+  border-radius: 10px;
 }
 .container-card img {
   width: 100%;
