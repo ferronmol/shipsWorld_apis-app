@@ -19,7 +19,7 @@ body {
   grid-template-areas: "panel" "main";
   gap: 1rem;
   padding: 1rem;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgba(0, 0, 0, 0.8);
   min-height: 100vh;
   width: 100%;
   background-size: contain;
@@ -69,7 +69,17 @@ body {
 }
 .nationalitySelect {
   display: none;
+  margin: 0.5rem;
 }
+.shipTypeSelect {
+  display: none;
+  margin: 0.5rem;
+}
+.shipNationSelect {
+  display: none;
+  margin: 0.5rem;
+}
+
 .user-container {
   position: absolute;
   right: 0;

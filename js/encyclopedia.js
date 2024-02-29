@@ -1,6 +1,13 @@
 import { fetchShips, fetchComanders } from "./peticiones.js";
 import { Barco, Comandante } from "./modelos/modelos.js";
-import { createCommanderCards, createShipCards, createCard } from "./cards.js";
+import {
+  createCommanderCards,
+  createShipCards,
+  createCard,
+  createTable,
+  createOption,
+  createPlaceholderOption,
+} from "./cards.js";
 let comandantesArray = [];
 let barcosArray = [];
 const comandantesPorPagina = 21;
@@ -14,6 +21,9 @@ const secondSelectEncyclopedia = document.querySelector(
   "#secondSelectEncyclopedia"
 );
 const nationalitySelect = document.getElementById("nationalitySelect");
+const shipTypeSelect = document.getElementById("shipTypeSelect");
+const shipNationSelect = document.getElementById("shipNationSelect");
+const tableContainer = document.getElementById("tableContainer");
 const aside = document.querySelector("aside");
 
 //recupero del localstorage el usuario logueado ques un json y lo muestro en su contenedor
@@ -107,14 +117,67 @@ secondSelectEncyclopedia.addEventListener("change", (e) => {
   if (selectedValue === "comandantes") {
     console.log("Seleccionado: comandantes");
     loadComandersAndNationalities();
+    shipTypeSelect.style.display = "none";
+    shipNationSelect.style.display = "none";
+    tableContainer.style.display = "none";
   } else {
     nationalitySelect.style.display = "none";
   }
   if (selectedValue === "barcos") {
     console.log("Seleccionado: barcos");
-    showShipsPagination();
+    // clean the section
+    section.innerHTML = "";
+    showShipsSelects(); //metodo para mostrar los selects de barcos
   }
 });
+/*** Charge ships selects and filter resolts */
+const showShipsSelects = () => {
+  //show select ship type
+  shipTypeSelect.style.display = "block";
+  shipTypeSelect.innerHTML = "";
+  shipTypeSelect.addEventListener("change", filterShips);
+
+  //show select ship nation
+  shipNationSelect.style.display = "block";
+  shipNationSelect.innerHTML = "";
+  shipNationSelect.addEventListener("change", filterShips);
+  filterShips();
+};
+/* ********************FILTER********************************* */
+/*
+ * Filtra los barcos por tipo y nación
+ *
+ * */
+function filterShips() {
+  const selectedType = shipTypeSelect.value;
+  const selectedNation = shipNationSelect.value;
+  const filteredShips = barcosArray.filter(
+    (barco) =>
+      (selectedType === "" || barco.tipo === selectedType) &&
+      (selectedNation === "" || barco.nacion === selectedNation)
+  );
+
+  shipTypeSelect.innerHTML = "";
+  shipNationSelect.innerHTML = "";
+  //create options for ship type select
+  const uniqueTypes = [...new Set(barcosArray.map((barco) => barco.tipo))];
+  const placeholderOptionType = createPlaceholderOption("Select Ship Type");
+  shipTypeSelect.appendChild(placeholderOptionType);
+  uniqueTypes.forEach((type) => {
+    const option = createOption(type);
+    shipTypeSelect.appendChild(option);
+  });
+  //create options for ship nation select
+  const uniqueNations = [...new Set(barcosArray.map((barco) => barco.nacion))];
+  const placeholderOptionNation = createPlaceholderOption("Select Ship Nation");
+  shipNationSelect.appendChild(placeholderOptionNation);
+  uniqueNations.forEach((nation) => {
+    const option = createOption(nation);
+    shipNationSelect.appendChild(option);
+  });
+
+  createTable(filteredShips);
+}
 
 /* ********************SHOW********************************* */
 /*

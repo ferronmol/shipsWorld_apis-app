@@ -96,3 +96,61 @@ export const createCard = (data) => {
 
   return div;
 };
+
+/**
+ * FUNCION PARA CREAR UNA TABLA DE BARCOS FILTRADOS
+ */
+export function createTable(data) {
+  const tableContainer = document.getElementById("tableContainer");
+  tableContainer.innerHTML = ""; // Limpiar la tabla anterior
+  tableContainer.style.display = "block"; // Mostrar la tabla
+  const table = document.createElement("table");
+  table.className = "styled-table"; // Puedes agregar una clase para dar estilo a la tabla
+
+  // Crear la cabecera de la tabla
+  const thead = document.createElement("thead");
+  const headerRow = document.createElement("tr");
+  const headers = ["Nombre", "Descripción", "Nación", "Tipo"]; // Ajusta según tus propiedades de Barco
+
+  headers.forEach((header) => {
+    const th = document.createElement("th");
+    th.innerText = header;
+    headerRow.appendChild(th);
+  });
+
+  thead.appendChild(headerRow);
+  table.appendChild(thead);
+
+  // Crear el cuerpo de la tabla
+  const tbody = document.createElement("tbody");
+
+  data.forEach((barco) => {
+    const row = document.createElement("tr");
+    const cells = [barco.nombre, barco.descripcion, barco.nacion, barco.tipo]; // Ajusta según tus propiedades de Barco
+
+    cells.forEach((cell) => {
+      const td = document.createElement("td");
+      td.innerText = cell;
+      row.appendChild(td);
+    });
+
+    tbody.appendChild(row);
+  });
+
+  table.appendChild(tbody);
+  tableContainer.appendChild(table);
+}
+export function createPlaceholderOption(text) {
+  const placeholderOption = document.createElement("option");
+  placeholderOption.value = "";
+  placeholderOption.text = text;
+  placeholderOption.disabled = true;
+  return placeholderOption;
+}
+
+export function createOption(value) {
+  const option = document.createElement("option");
+  option.value = value;
+  option.text = value;
+  return option;
+}
