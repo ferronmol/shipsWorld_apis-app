@@ -151,31 +151,32 @@ const showShipsSelects = () => {
 function filterShips() {
   const selectedType = shipTypeSelect.value;
   const selectedNation = shipNationSelect.value;
+
+  // Filtrar los barcos
   const filteredShips = barcosArray.filter(
     (barco) =>
       (selectedType === "" || barco.tipo === selectedType) &&
       (selectedNation === "" || barco.nacion === selectedNation)
   );
 
-  shipTypeSelect.innerHTML = "";
-  shipNationSelect.innerHTML = "";
-  //create options for ship type select
-  const uniqueTypes = [...new Set(barcosArray.map((barco) => barco.tipo))];
-  const placeholderOptionType = createPlaceholderOption("Select Ship Type");
-  shipTypeSelect.appendChild(placeholderOptionType);
+  // Limpiar opciones y recrearlas
+  const uniqueTypes = [...new Set(filteredShips.map((barco) => barco.tipo))];
+  uniqueTypes.unshift("Select Ship Type");
   uniqueTypes.forEach((type) => {
     const option = createOption(type);
     shipTypeSelect.appendChild(option);
   });
-  //create options for ship nation select
-  const uniqueNations = [...new Set(barcosArray.map((barco) => barco.nacion))];
-  const placeholderOptionNation = createPlaceholderOption("Select Ship Nation");
-  shipNationSelect.appendChild(placeholderOptionNation);
+
+  const uniqueNations = [
+    ...new Set(filteredShips.map((barco) => barco.nacion)),
+  ];
+  uniqueNations.unshift("Select Ship Nation");
   uniqueNations.forEach((nation) => {
     const option = createOption(nation);
     shipNationSelect.appendChild(option);
   });
 
+  // Llamar a createTable con los barcos filtrados
   createTable(filteredShips);
 }
 

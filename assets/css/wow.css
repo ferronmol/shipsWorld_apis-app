@@ -13,13 +13,23 @@ body {
   background-attachment: fixed;
   background-repeat: no-repeat;
 }
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: -1;
+}
 .page-container {
   display: grid;
   grid-template-rows: 100px 1fr;
   grid-template-areas: "panel" "main";
   gap: 1rem;
   padding: 1rem;
-  background-color: rgba(0, 0, 0, 0.8);
+  /* background-color: rgba(0, 0, 0, 0.8); */
   min-height: 100vh;
   width: 100%;
   background-size: contain;
@@ -225,4 +235,14 @@ body {
 .main__players {
   background-color: rgba(0, 0, 0, 0.6);
   min-height: 100vh;
+}
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 25px auto;
+  font-size: 0.8em;
+  min-width: 400px;
+  border-radius: 10px 10px 0 0;
+  overflow-y: scroll;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.35);
 }

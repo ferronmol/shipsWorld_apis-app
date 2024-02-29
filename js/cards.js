@@ -100,17 +100,18 @@ export const createCard = (data) => {
 /**
  * FUNCION PARA CREAR UNA TABLA DE BARCOS FILTRADOS
  */
-export function createTable(data) {
+export function createTable(filteredShips) {
   const tableContainer = document.getElementById("tableContainer");
-  tableContainer.innerHTML = ""; // Limpiar la tabla anterior
-  tableContainer.style.display = "block"; // Mostrar la tabla
+  tableContainer.innerHTML = "";
+  tableContainer.style.display = "block";
   const table = document.createElement("table");
-  table.className = "styled-table"; // Puedes agregar una clase para dar estilo a la tabla
+  table.className = "table table-dark table-striped styled-table";
 
   // Crear la cabecera de la tabla
   const thead = document.createElement("thead");
+  thead.className = "thead-dark";
   const headerRow = document.createElement("tr");
-  const headers = ["Nombre", "Descripción", "Nación", "Tipo"]; // Ajusta según tus propiedades de Barco
+  const headers = ["Nombre", "Descripción", "Nación", "Tipo"];
 
   headers.forEach((header) => {
     const th = document.createElement("th");
@@ -121,12 +122,13 @@ export function createTable(data) {
   thead.appendChild(headerRow);
   table.appendChild(thead);
 
-  // Crear el cuerpo de la tabla
+  // create the body of the table
   const tbody = document.createElement("tbody");
+  tbody.className = "tbody-light";
 
-  data.forEach((barco) => {
+  filteredShips.forEach((barco) => {
     const row = document.createElement("tr");
-    const cells = [barco.nombre, barco.descripcion, barco.nacion, barco.tipo]; // Ajusta según tus propiedades de Barco
+    const cells = [barco.nombre, barco.descripcion, barco.nacion, barco.tipo];
 
     cells.forEach((cell) => {
       const td = document.createElement("td");
