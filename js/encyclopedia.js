@@ -3,7 +3,7 @@ import { Barco, Comandante } from "./modelos/modelos.js";
 import { createCommanderCards, createShipCards, createCard } from "./cards.js";
 let comandantesArray = [];
 let barcosArray = [];
-const comandantesPorPagina = 20;
+const comandantesPorPagina = 21;
 let paginaActual = 1;
 
 const userContainer = document.getElementById("user-container");
