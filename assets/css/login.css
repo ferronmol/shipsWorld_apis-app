@@ -141,3 +141,7 @@ body {
     max-height: 80%;
   }
 }
+.title {
+  position: absolute;
+  top: 1rem;
+}

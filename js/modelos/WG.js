@@ -1,6 +1,5 @@
 class WG {
   constructor() {
-    // this.application_id = "97f4b2c203d63f5db6fd508661fe5ba8";
     this.application_id = "96b472d7bdc2aad0591a995d4ac74b08";
   }
   // Get the actual player's id

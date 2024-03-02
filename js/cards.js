@@ -106,6 +106,7 @@ export function createTable(filteredShips) {
   tableContainer.style.display = "block";
   const table = document.createElement("table");
   table.className = "table table-dark table-striped styled-table";
+  table.style.marginLeft = "3rem";
 
   // Crear la cabecera de la tabla
   const thead = document.createElement("thead");
@@ -150,9 +151,10 @@ export function createPlaceholderOption(text) {
   return placeholderOption;
 }
 
-export function createOption(value) {
+export function createOption(select, value, text) {
   const option = document.createElement("option");
   option.value = value;
-  option.text = value;
-  return option;
+  option.text = text;
+
+  select.appendChild(option);
 }

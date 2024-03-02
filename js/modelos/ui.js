@@ -41,11 +41,14 @@ class UI {
     // Create a card
     const card = document.createElement("div");
     card.className = "card";
+    card.style.backgroundColor = "royalblue";
     const cardHead = document.createElement("div");
     cardHead.classList = "card card-head";
+    cardHead.style.backgroundColor = "royalblue";
     const h3 = document.createElement("h3");
     const cardBody = document.createElement("div");
     cardBody.classList = "card card-body";
+    cardBody.style.backgroundColor = "lightblue";
 
     let output = "";
     if (this.output.childElementCount < 1) {
@@ -122,7 +125,7 @@ class UI {
     ];
 
     return (
-      date.getFullYear() + " " + month[date.getMonth()] + " " + date.getDate()
+      date.getDate() + " " + month[date.getMonth()] + " " + date.getFullYear()
     );
   }
 }

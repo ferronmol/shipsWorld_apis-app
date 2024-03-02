@@ -151,6 +151,8 @@ const showShipsSelects = () => {
 function filterShips() {
   const selectedType = shipTypeSelect.value;
   const selectedNation = shipNationSelect.value;
+  //guardar el tipo de barco seleccionado en el localstorage para usarlo en el segundo select
+  localStorage.setItem("selectedType", selectedType);
 
   // Filtrar los barcos
   const filteredShips = barcosArray.filter(
@@ -158,23 +160,27 @@ function filterShips() {
       (selectedType === "" || barco.tipo === selectedType) &&
       (selectedNation === "" || barco.nacion === selectedNation)
   );
-
-  // Limpiar opciones y recrearlas
-  const uniqueTypes = [...new Set(filteredShips.map((barco) => barco.tipo))];
-  uniqueTypes.unshift("Select Ship Type");
-  uniqueTypes.forEach((type) => {
-    const option = createOption(type);
-    shipTypeSelect.appendChild(option);
-  });
-
+  // cargo lel select para filtar
+  shipTypeSelect.innerHTML = "";
+  createOption(shipTypeSelect, "", "Select type");
+  const uniqueTypes = [...new Set(barcosArray.map((barco) => barco.tipo))];
+  uniqueTypes.forEach((type) => createOption(shipTypeSelect, type, type));
+  //filtrar por nacion sin perder los tipos
+  shipNationSelect.innerHTML = "";
+  createOption(shipNationSelect, "", "Select nation");
   const uniqueNations = [
     ...new Set(filteredShips.map((barco) => barco.nacion)),
   ];
-  uniqueNations.unshift("Select Ship Nation");
-  uniqueNations.forEach((nation) => {
-    const option = createOption(nation);
-    shipNationSelect.appendChild(option);
-  });
+  uniqueNations.forEach((nation) =>
+    createOption(shipNationSelect, nation, nation)
+  );
+
+  //recupero el tipo
+  const selectedTypeFromLocalStorage = localStorage.getItem("selectedType");
+  // Si el tipo de barco seleccionado está en los tipos únicos, seleccionarlo
+  if (uniqueTypes.includes(selectedTypeFromLocalStorage)) {
+    shipTypeSelect.value = selectedTypeFromLocalStorage;
+  }
 
   // Llamar a createTable con los barcos filtrados
   createTable(filteredShips);
