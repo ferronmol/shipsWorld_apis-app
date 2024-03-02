@@ -44,3 +44,13 @@ export const fetchComanders = async () => {
   console.log("pedido info de comandantes");
   return json;
 };
+
+// peticion a la wikipedia con la palabra clave
+export const fetchWiki = async (keyword) => {
+  const wiki = await fetch(
+    `https://es.wikipedia.org/w/api.php?action=query&format=json&origin=*&list=search&srsearch=${keyword}`
+  );
+  const json = await wiki.json();
+  console.log("pedido info de wikipedia");
+  return json;
+};

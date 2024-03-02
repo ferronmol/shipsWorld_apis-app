@@ -127,24 +127,37 @@ body::before {
   justify-content: center;
   align-items: center;
   grid-area: section;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  grid-template-rows: repeat(auto-fill, minmax(120px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  grid-template-rows: repeat(auto-fill, minmax(100px, 1fr));
   grid-gap: 1.5rem;
   margin: 1rem;
   background: rgba(138, 136, 136, 0.5);
   border-radius: 10px;
 }
+.container-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: rgba(138, 136, 136, 0.5);
+  padding: 0.4rem;
+  margin: 0.3rem;
+  border-radius: 50%;
+}
 .container-card img {
   width: 100%;
   max-height: 80%;
-  border-radius: 10px;
+  border-radius: 50%;
   cursor: pointer;
   object-fit: contain;
 }
-.card img:hover {
+.card img:hover,
+.container-card img:hover {
   transform: scale(1.1);
   transition: all 0.5s ease;
 }
+
 .cardArticle {
   display: flex;
   justify-content: space-between;
@@ -154,27 +167,7 @@ body::before {
   padding: 0.4rem;
   margin: 0.3rem;
 }
-.card__enciclopedia {
-  display: flex;
-  max-width: 150px;
-  max-height: 150px;
-  flex-direction: column;
-  justify-content: space-between;
-  background-color: rgba(138, 136, 136, 0.5);
-  border-radius: 10px;
-  text-align: center;
-  padding: 0.4rem;
-  margin: 0.3rem;
-}
-.container-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 0.4rem;
-  margin: 0.3rem;
-}
+
 .text-card {
   width: 100%;
   color: #fff;
@@ -182,7 +175,7 @@ body::before {
   font-size: 0.7rem;
   text-align: center;
   padding: 0.3rem;
-  margin: 0.2rem;
+  margin-top: 0.2rem;
 }
 
 .aside {
@@ -193,33 +186,7 @@ body::before {
   background-position: center;
   border-radius: 10px;
 }
-/******PAGINACIONES********/
-.pagination-container {
-  display: none;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  padding: 10px;
-  margin: 10px;
-}
-.pagination button {
-  padding: 10px;
-  border-radius: 10px;
-  border: none;
-  background-color: #f8f3f3;
-  color: #000;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.5s ease;
-}
-.pagination button:hover {
-  background-color: #000;
-  color: #fff;
-}
-.pagination button.active {
-  background-color: #000;
-  color: #fff;
-}
+
 .containerInfo {
   display: flex;
   align-items: center;
