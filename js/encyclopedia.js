@@ -17,7 +17,7 @@ const nationalitySelect = document.getElementById("nationalitySelect");
 const shipTypeSelect = document.getElementById("shipTypeSelect");
 const shipNationSelect = document.getElementById("shipNationSelect");
 const tableContainer = document.getElementById("tableContainer");
-const aside = document.querySelector("aside");
+const wikiContainer = document.getElementById("wikiContainer");
 
 // Recupero del localstorage el usuario logueado que es un JSON y lo muestro en su contenedor
 const userData = localStorage.getItem("username");
@@ -77,7 +77,7 @@ categorySelect.addEventListener("change", async () => {
     console.log("Seleccionado: encyclopedia");
     secondSelectEncyclopedia.style.display = "none";
     nationalitySelect.style.display = "none";
-    aside.style.display = "none";
+    wikiContainer.style.display = "none";
     const comandantes = await getComanders();
     const barcos = await getShips();
     secondSelectEncyclopedia.style.display = "block";
@@ -103,7 +103,6 @@ secondSelectEncyclopedia.addEventListener("change", (e) => {
     console.log("Seleccionado: barcos");
     section.innerHTML = "";
     showShipsSelects();
-    searchInWiki();
   }
 });
 

@@ -1,3 +1,5 @@
+import { searchInWiki } from "./wiki.js";
+
 //Función para crear cartas de comandantes
 export const createCommanderCards = (comandantes) => {
   section.innerHTML = "";
@@ -138,13 +140,6 @@ export function createTable(filteredShips) {
   tableContainer.appendChild(table);
 }
 
-// Function to handle the Wiki button click
-function handleWikiButtonClick(shipName) {
-  // console.log(`Wiki button clicked for ship: ${shipName}`);
-  localStorage.setItem("shipsWiki", shipName);
-  console.log("Nombre del barco en localStorage: ", shipName);
-}
-
 export function createPlaceholderOption(text) {
   const placeholderOption = document.createElement("option");
   placeholderOption.value = "";
@@ -159,4 +154,33 @@ export function createOption(select, value, text) {
   option.text = text;
 
   select.appendChild(option);
+}
+
+// Function to handle the Wiki button click
+export function handleWikiButtonClick(shipName) {
+  // console.log(`Wiki button clicked for ship: ${shipName}`);
+  localStorage.setItem("shipsWiki", shipName);
+  console.log("Nombre del barco en localStorage: ", shipName);
+  //muestra el aside
+  wikiContainer.style.display = "block";
+  searchInWiki();
+}
+
+export function createWikiContent(wikiResults) {
+  let wikiContent = "";
+  wikiResults.forEach((result) => {
+    const title = result.title;
+    const snippet = result.snippet;
+    const pageId = result.pageid;
+    const wikiUrl = `https://en.wikipedia.org/?curid=${pageId}`;
+
+    wikiContent += `
+      <div class="wikiResult">
+        <h3>${title}</h3>
+        <p>${snippet}</p>
+        <a href="${wikiUrl}" target="_blank">Read more</a>  
+      </div>
+    `;
+  });
+  return wikiContent;
 }

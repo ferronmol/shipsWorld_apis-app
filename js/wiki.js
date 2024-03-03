@@ -1,5 +1,6 @@
 // wiki.js
 import * as wikiApi from "./peticiones.js";
+import * as Cards from "./cards.js";
 
 // Función para manejar la búsqueda en Wikipedia
 export const searchInWiki = async () => {
@@ -10,12 +11,26 @@ export const searchInWiki = async () => {
 
     // Verifica si se encontró un nombre de barco
     if (shipName) {
+      //oculto la tabla de barcos
+      const tableContainer = document.getElementById("tableContainer");
+      tableContainer.style.display = "none";
+
+      //muestro el aside
+      const wikiContainer = document.getElementById("wikiContainer");
+      wikiContainer.style.display = "block";
+
       // Realiza la búsqueda en Wikipedia usando el nombre del barco
       const wikiData = await wikiApi.fetchWiki(shipName);
       const wikiResults = wikiData.query.search;
 
       // Imprime los resultados en la consola (puedes ajustar esto según tus necesidades)
       console.log("Wiki results: ", wikiResults);
+
+      const asideTitle = document.querySelector(".wikiContainer_title");
+      asideTitle.innerText = `Resultados de Wikipedia para ${shipName}`;
+
+      const wikiContent = Cards.createWikiContent(wikiResults);
+      wikiContainer.innerHTML = wikiContent;
     } else {
       console.error("No se encontró el nombre del barco en el localStorage.");
     }
@@ -24,5 +39,14 @@ export const searchInWiki = async () => {
   }
 };
 
-// Llama a la función de búsqueda en Wikipedia al cargar el script (opcional)
-searchInWiki();
+document.addEventListener("DOMContentLoaded", () => {
+  const wikiButton = document.getElementById("wikiButton");
+  if (wikiButton) {
+    wikiButton.addEventListener("click", searchInWiki);
+  }
+  const asideTitle = document.querySelector(".wikiContainer_title");
+  if (asideTitle) {
+    // Establece el texto interior solo si el elemento existe
+    asideTitle.innerText = "Resultados de Wikipedia para ";
+  }
+});

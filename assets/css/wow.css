@@ -178,13 +178,14 @@ body::before {
   margin-top: 0.2rem;
 }
 
-.aside {
+.wikiCnntainer {
   grid-area: aside;
-  background-image: url(../images/barco1r.jpg);
+  background-image: url(../images/plano1.jpg);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   border-radius: 10px;
+  display: none;
 }
 
 .containerInfo {
