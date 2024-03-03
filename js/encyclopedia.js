@@ -94,6 +94,7 @@ secondSelectEncyclopedia.addEventListener("change", (e) => {
     shipTypeSelect.style.display = "none";
     shipNationSelect.style.display = "none";
     tableContainer.style.display = "none";
+    wikiContainer.style.display = "none";
     showCommander();
   } else {
     nationalitySelect.style.display = "none";

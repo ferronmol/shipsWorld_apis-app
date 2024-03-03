@@ -41,13 +41,16 @@ export const searchInWiki = async () => {
 
 document.addEventListener("DOMContentLoaded", () => {
   const wikiButton = document.getElementById("wikiButton");
+  console.log("Wiki button: ", wikiButton);
   const wikiContainer = document.getElementById("wikiContainer");
+
   if (wikiButton) {
     wikiButton.addEventListener("click", () => {
       const shipName = localStorage.getItem("shipsWiki");
       handleWikiButtonClick(shipName, wikiContainer);
     });
   }
+
   const wikiContainer_title = document.querySelector(".wikiContainer_title");
   if (wikiContainer_title) {
     // Establece el texto interior solo si el elemento existe

@@ -16,6 +16,7 @@ export const createCommanderCards = (comandantes) => {
 
 // Función para crear cartas de barcos
 export const createShipCards = (barcos) => {
+  const section = document.getElementById("section");
   section.innerHTML = "";
   const article = document.createElement("article");
   article.classList.add("cardArticle");
@@ -175,20 +176,31 @@ export function handleWikiButtonClick(shipName, wikiContainer) {
 }
 
 export function createWikiContent(wikiResults) {
+  console.log("Resultados de Wikipedia: ", wikiResults);
   let wikiContent = "";
-  wikiResults.forEach((result) => {
+  const limitedResults = wikiResults.slice(0, 3);
+
+  wikiContent +=
+    '<div class="row d-flex flex-wrap align-items-center justify-content-center">';
+
+  limitedResults.forEach((result) => {
     const title = result.title;
     const snippet = result.snippet;
     const pageId = result.pageid;
     const wikiUrl = `https://en.wikipedia.org/?curid=${pageId}`;
 
     wikiContent += `
-      <div class="wikiResult">
-        <h3>${title}</h3>
-        <p>${snippet}</p>
-        <a href="${wikiUrl}" target="_blank">Read more</a>  
+      <div class="col-md-3 bg-light m-3">
+        <div class="wikiResult text-center">
+          <h3 class="">${title}</h3>
+          <p>${snippet}</p>
+          <a href="${wikiUrl}" target="_blank" class="btn btn-info d-block mx-auto mb-1">Read more</a>
+        </div>
       </div>
     `;
   });
+
+  wikiContent += "</div>";
+
   return wikiContent;
 }
