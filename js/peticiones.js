@@ -56,7 +56,7 @@ export const fetchComanders = async () => {
 // };
 export const fetchWiki = async (keyword) => {
   // Agrega términos de búsqueda en español
-  const searchTerm = `${keyword} barco guerra`;
+  const searchTerm = `${keyword}  guerra`;
 
   try {
     const apiUrl = "https://es.wikipedia.org/w/api.php";

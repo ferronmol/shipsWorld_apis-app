@@ -10,7 +10,11 @@ export const createCommanderCards = (comandantes) => {
   );
 
   comandantesconFoto.forEach((comandante) => {
-    section.appendChild(createCard(comandante));
+    const commanderCard = createCard(comandante);
+    section.appendChild(commanderCard);
+    commanderCard.addEventListener("click", () => {
+      handleWikiButtonClick(comandante.nombre, wikiContainer);
+    });
   });
 };
 
