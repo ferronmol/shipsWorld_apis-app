@@ -156,13 +156,21 @@ export function createOption(select, value, text) {
   select.appendChild(option);
 }
 
+/* ********************* WIKI ***********************
+ *
+ *
+ */
+
 // Function to handle the Wiki button click
-export function handleWikiButtonClick(shipName) {
+export function handleWikiButtonClick(shipName, wikiContainer) {
   // console.log(`Wiki button clicked for ship: ${shipName}`);
   localStorage.setItem("shipsWiki", shipName);
   console.log("Nombre del barco en localStorage: ", shipName);
-  //muestra el aside
-  wikiContainer.style.display = "block";
+  if (wikiContainer) {
+    wikiContainer.style.display = "block";
+  } else {
+    console.error("No se encontró el contenedor de Wikipedia.");
+  }
   searchInWiki();
 }
 

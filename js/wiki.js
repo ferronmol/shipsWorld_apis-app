@@ -41,12 +41,16 @@ export const searchInWiki = async () => {
 
 document.addEventListener("DOMContentLoaded", () => {
   const wikiButton = document.getElementById("wikiButton");
+  const wikiContainer = document.getElementById("wikiContainer");
   if (wikiButton) {
-    wikiButton.addEventListener("click", searchInWiki);
+    wikiButton.addEventListener("click", () => {
+      const shipName = localStorage.getItem("shipsWiki");
+      handleWikiButtonClick(shipName, wikiContainer);
+    });
   }
-  const asideTitle = document.querySelector(".wikiContainer_title");
-  if (asideTitle) {
+  const wikiContainer_title = document.querySelector(".wikiContainer_title");
+  if (wikiContainer_title) {
     // Establece el texto interior solo si el elemento existe
-    asideTitle.innerText = "Resultados de Wikipedia para ";
+    wikiContainer_title.innerText = "Resultados de Wikipedia";
   }
 });

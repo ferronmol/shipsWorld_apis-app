@@ -178,7 +178,7 @@ body::before {
   margin-top: 0.2rem;
 }
 
-.wikiCnntainer {
+.wikiContainer {
   grid-area: aside;
   background-image: url(../images/plano1.jpg);
   background-size: contain;
