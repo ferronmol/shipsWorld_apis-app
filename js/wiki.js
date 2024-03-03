@@ -1,6 +1,8 @@
 // wiki.js
 import * as wikiApi from "./peticiones.js";
 import * as Cards from "./cards.js";
+const wikiButton = document.getElementById("wikiButton");
+const wikiContainer = document.getElementById("wikiContainer");
 
 // Función para manejar la búsqueda en Wikipedia
 export const searchInWiki = async () => {
@@ -25,20 +27,22 @@ export const searchInWiki = async () => {
       const wikiData = await wikiApi.fetchWiki(shipName);
       const wikiResults = wikiData.query.search;
 
-      // Imprime los resultados en la consola (puedes ajustar esto según tus necesidades)
       console.log("Wiki results: ", wikiResults);
-      const asideTitle = document.querySelector(".wikiContainer_title");
+      const wikiContainer_title = document.querySelector(
+        ".wikiContainer_title"
+      );
 
-      // Verifica si el elemento existe antes de establecer el texto
-      if (asideTitle) {
-        asideTitle.innerText = `Resultados de Wikipedia para ${shipName}`;
-      } else {
-        console.error(
-          "No se encontró el elemento con la clase 'wikiContainer_title'."
-        );
-      }
       const wikiContent = Cards.createWikiContent(wikiResults);
       wikiContainer.innerHTML = wikiContent;
+      //añado un boton de retorno
+      const backButton = document.createElement("button");
+      backButton.classList.add("backButton");
+      backButton.innerText = "Back";
+      backButton.addEventListener("click", () => {
+        wikiContainer.style.display = "none";
+        tableContainer.style.display = "block";
+      });
+      wikiContainer.appendChild(backButton);
     } else {
       console.error("No se encontró el nombre del barco en el localStorage.");
     }
@@ -48,20 +52,22 @@ export const searchInWiki = async () => {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  const wikiButton = document.getElementById("wikiButton");
-  console.log("Wiki button: ", wikiButton);
-  const wikiContainer = document.getElementById("wikiContainer");
-
   if (wikiButton) {
-    wikiButton.addEventListener("click", () => {
+    wikiButton.addEventListener("click", async () => {
       const shipName = localStorage.getItem("shipsWiki");
-      handleWikiButtonClick(shipName, wikiContainer);
-    });
-  }
+      await handleWikiButtonClick(shipName, wikiContainer);
+      const wikiContainer_title = document.querySelector(
+        ".wikiContainer_title"
+      );
 
-  const wikiContainer_title = document.querySelector(".wikiContainer_title");
-  if (wikiContainer_title) {
-    // Establece el texto interior solo si el elemento existe
-    wikiContainer_title.innerText = "Resultados de Wikipedia";
+      if (wikiContainer_title) {
+        wikiContainer_title.innerText =
+          "Resultados de Wikipedia para " + shipName;
+      } else {
+        console.error(
+          "No se encontró el elemento con la clase 'wikiContainer_title'."
+        );
+      }
+    });
   }
 });

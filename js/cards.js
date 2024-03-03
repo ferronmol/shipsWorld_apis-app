@@ -78,6 +78,9 @@ export function createTable(filteredShips) {
   const tableContainer = document.getElementById("tableContainer");
   tableContainer.innerHTML = "";
   tableContainer.style.display = "block";
+  //oculto el contenedor de wiki
+  const wikiContainer = document.getElementById("wikiContainer");
+  wikiContainer.style.display = "none";
 
   const table = document.createElement("table");
   table.className = "table table-dark table-striped styled-table";
@@ -167,11 +170,10 @@ export function handleWikiButtonClick(shipName, wikiContainer) {
   // console.log(`Wiki button clicked for ship: ${shipName}`);
   localStorage.setItem("shipsWiki", shipName);
   console.log("Nombre del barco en localStorage: ", shipName);
-  if (wikiContainer) {
-    wikiContainer.style.display = "block";
-  } else {
-    console.error("No se encontró el contenedor de Wikipedia.");
+  if (!wikiContainer) {
+    wikiContainer = document.getElementById("wikiContainer");
   }
+  wikiContainer.style.display = "block";
   searchInWiki();
 }
 
@@ -181,7 +183,7 @@ export function createWikiContent(wikiResults) {
   const limitedResults = wikiResults.slice(0, 3);
 
   wikiContent +=
-    '<div class="row d-flex flex-wrap align-items-center justify-content-center">';
+    '<div class="row d-flex flex-wrap align-items-stretch justify-content-center">';
 
   limitedResults.forEach((result) => {
     const title = result.title;
@@ -190,11 +192,11 @@ export function createWikiContent(wikiResults) {
     const wikiUrl = `https://en.wikipedia.org/?curid=${pageId}`;
 
     wikiContent += `
-      <div class="col-md-3 bg-light m-3">
-        <div class="wikiResult text-center">
-          <h3 class="">${title}</h3>
+      <div class="col-md-3 bg-light m-3 wikiResultContainer">
+        <div class="wikiResult d-flex text-center flex-column justify-content-between ">
+          <h4 class="">${title}</h4>
           <p>${snippet}</p>
-          <a href="${wikiUrl}" target="_blank" class="btn btn-info d-block mx-auto mb-1">Read more</a>
+          <a href="${wikiUrl}" target="_blank" class="btn btn-info d-block  mt-auto mb-1">Read more</a>
         </div>
       </div>
     `;

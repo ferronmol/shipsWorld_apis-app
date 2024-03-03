@@ -46,11 +46,36 @@ export const fetchComanders = async () => {
 };
 
 // peticion a la wikipedia con la palabra clave
+// export const fetchWiki = async (keyword) => {
+//   const wiki = await fetch(
+//     `https://es.wikipedia.org/w/api.php?action=query&format=json&origin=*&list=search&srsearch=${keyword}`
+//   );
+//   const json = await wiki.json();
+//   console.log("pedido info de wikipedia");
+//   return json;
+// };
 export const fetchWiki = async (keyword) => {
-  const wiki = await fetch(
-    `https://es.wikipedia.org/w/api.php?action=query&format=json&origin=*&list=search&srsearch=${keyword}`
-  );
-  const json = await wiki.json();
-  console.log("pedido info de wikipedia");
-  return json;
+  // Agrega términos de búsqueda en español
+  const searchTerm = `${keyword} barco guerra`;
+
+  try {
+    const apiUrl = "https://es.wikipedia.org/w/api.php";
+    const params = {
+      action: "query",
+      list: "search",
+      srsearch: searchTerm,
+      format: "json",
+      origin: "*",
+      srprop: "snippet", // Esto devolverá extractos (snippets) en español
+      utf8: 1, // Especifica el formato UTF-8 para caracteres especiales
+    };
+
+    const response = await fetch(`${apiUrl}?${new URLSearchParams(params)}`);
+    const data = await response.json();
+    console.log("Pedido de información de Wikipedia");
+
+    return data;
+  } catch (error) {
+    console.error("Error al buscar en Wikipedia: ", error);
+  }
 };
