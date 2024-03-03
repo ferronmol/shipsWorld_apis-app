@@ -18,6 +18,8 @@ export const searchInWiki = async () => {
       //muestro el aside
       const wikiContainer = document.getElementById("wikiContainer");
       wikiContainer.style.display = "block";
+      //borra el contenido anterior
+      wikiContainer.innerHTML = "";
 
       // Realiza la búsqueda en Wikipedia usando el nombre del barco
       const wikiData = await wikiApi.fetchWiki(shipName);
@@ -25,10 +27,16 @@ export const searchInWiki = async () => {
 
       // Imprime los resultados en la consola (puedes ajustar esto según tus necesidades)
       console.log("Wiki results: ", wikiResults);
-
       const asideTitle = document.querySelector(".wikiContainer_title");
-      asideTitle.innerText = `Resultados de Wikipedia para ${shipName}`;
 
+      // Verifica si el elemento existe antes de establecer el texto
+      if (asideTitle) {
+        asideTitle.innerText = `Resultados de Wikipedia para ${shipName}`;
+      } else {
+        console.error(
+          "No se encontró el elemento con la clase 'wikiContainer_title'."
+        );
+      }
       const wikiContent = Cards.createWikiContent(wikiResults);
       wikiContainer.innerHTML = wikiContent;
     } else {
